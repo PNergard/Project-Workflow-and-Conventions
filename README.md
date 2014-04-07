@@ -46,6 +46,45 @@ Feature branches (or sometimes called topic branches) are used to develop new fe
 - **merge into:** develop
 - **naming convention:** anything except master, develop, release-*, or hotfix-*
 
-###Further details and complete guide
-Read more about the [Gitflow Workflow](https://www.atlassian.com/git/workflows?_escaped_fragment_=workflow-gitflow#!workflow-gitflow)
+###JIRA Integration
+All Git repositories are connected to a project in JIRA and you can add comments and log time from the commit message in git to a project issue.
 
+#####comment Directive
+ISSUE_KEY #comment <comment_string>
+
+Records a comment against an issue.  For example:
+```
+JRA-34 #comment corrected indent issue
+```
+Adds the comment "corrected indent issue" to the issue.
+
+#####time Command
+ISSUE_KEY #time <value>w <value>d <value>h <value>m  <comment_string> 
+```
+JRA-34 #time 1w 2d 4h 30m Total work logged
+```
+This example records 1 week, 2 days, 4hours and 30 minutes against an issue, and adds the comment 'Total work logged' in the Work 
+
+All commits must be associated with an Issue in JIRA. If no issue exists you should create one. For example, you might need to refactor some code. Instead of logging your time to the last issue you were working on, create a new issue called "refactoring code" and commit that code with a comment to that very issue. That will keep ourselves informed on what's happening and why someone just "wasted" 8 hours work on some seamingly meaningless task that didn't produce any neat features.
+
+
+###Further details and complete guide
+- [Gitflow Workflow](https://www.atlassian.com/git/workflows?_escaped_fragment_=workflow-gitflow#!workflow-gitflow)
+- [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
+
+##Front-End Code Conventions
+
+###HTML Templates
+###Less and CSS
+###Java Scripts
+
+
+##Back-End Code Conventions
+
+##The laws of code
+1. The developer must not commit faulty code to any other branch than his/her own feature branch. 
+2. The developer must at all times commit to follow the naming and code conventions.
+3. The developer must not go on vacation to far away countries without first doing a commit and push.
+4. The developer must associate all commits with an Issue in JIRA
+
+Any failure to comply to the laws of code is forced to buy fika for the entire team
