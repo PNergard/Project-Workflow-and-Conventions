@@ -23,7 +23,14 @@ Hotfix branches are used to quickly patch production releases. This is the only 
 - **merge into:** master/develop/release
 
 ###Release
+Once develop has acquired enough features for a release (or a predetermined release date is approaching), you fork a release branch off of develop. Creating this branch starts the next release cycle, so no new features can be added after this point—only bug fixes, documentation generation, and other release-oriented tasks should go in this branch. Once it's ready to ship, the release gets merged into master and tagged with a version number. In addition, it should be merged back into develop, which may have progressed since the release was initiated.
 
+Using a dedicated branch to prepare releases makes it possible for one team to polish the current release while another team continues working on features for the next release. It also creates well-defined phases of development (e.g., it's easy to say, “this week we're preparing for version 4.0” and to actually see it in the structure of the repository).
+
+####Common conventions:
+- **branch off:** develop
+- **merge into:** master
+- **naming convention:** release-* or release/*
 
 ###Develop
 
