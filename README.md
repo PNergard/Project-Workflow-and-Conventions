@@ -6,17 +6,20 @@ This is a live document describing our Git Workflow and code guidelines regardin
 
 ##Git Workflow and branching
 
-![Git Workflow](https://raw.githubusercontent.com/KnowitLabs/Project-Workflow-and-Conventions/master/img/git-workflow-release-cycle-4maintenance.png "Git Workflow")
+![Git Workflow](https://raw.githubusercontent.com/KnowitLabs/Project-Workflow-and-Conventions/master/img/branching.png "Git Branching Workflow")
 
 This workflow uses two branches to record the history of the project. The master branch stores the official release history, and the develop branch serves as an integration branch for features. It's also convenient to tag all commits in the master branch with a version number.
 
-###Master
+#Front-end branching and project branching
+The front-end code operates on two main branches, `fe-master` and `fe-develop`. The project branch retreives the front-end code from the `fe-master` branch. The `fe-master` operates according to the same rules as the `master` branch with the only exception that it only handles front-end code.
+
+###master
 This is the main repository used for deploying releases. No development is done here but rather branched to **develop** or **hotfix** to later be merged back into the master branch when ready for a release. The master holds all release tags, and tags are made using [Semantic Versioning 2.0.0](http://semver.org).
 
 ####Common conventions:
 - **Naming convention:** Refer to [Semantic Versioning 2.0.0](http://semver.org)
 
-###Hotfix
+###hotfix
 Hotfix branches are used to quickly patch production releases. This is the only branch that should fork directly off of master. As soon as the fix is complete, it should be merged into both master and develop (or the current release branch), and master should be tagged with an updated version number.
 
 ####Common conventions:
@@ -24,7 +27,7 @@ Hotfix branches are used to quickly patch production releases. This is the only 
 - **branch off:** master
 - **merge into:** master/develop/release
 
-###Release
+###release
 Once develop has acquired enough features for a release (or a predetermined release date is approaching), you fork a release branch off of develop. Creating this branch starts the next release cycle, so no new features can be added after this point—only bug fixes, documentation generation, and other release-oriented tasks should go in this branch. Once it's ready to ship, the release gets merged into master and tagged with a version number. In addition, it should be merged back into develop, which may have progressed since the release was initiated.
 
 Using a dedicated branch to prepare releases makes it possible for one team to polish the current release while another team continues working on features for the next release. It also creates well-defined phases of development (e.g., it's easy to say, “this week we're preparing for version 4.0” and to actually see it in the structure of the repository).
@@ -34,11 +37,10 @@ Using a dedicated branch to prepare releases makes it possible for one team to p
 - **merge into:** master
 - **naming convention:** release-* or release/*
 
-###Develop
+###develop
 This is the main branch where the source code of HEAD always reflects a state with the latest delivered development changes for the next release. This is where any automatic nightly builds are built from. Larger tasks, issues and/or fatures are branched into a feature branch only to be marged back into the develop branch in the future.
 
-
-###Feature
+###feature
 Feature branches (or sometimes called topic branches) are used to develop new features for the upcoming or a distant future release. When starting development of a feature, the target release in which this feature will be incorporated may well be unknown at that point. The essence of a feature branch is that it exists as long as the feature is in development, but will eventually be merged back into develop (to definitely add the new feature to the upcoming release) or discarded (in case of a disappointing experiment).
 
 ####Common conventions:
@@ -75,11 +77,56 @@ All commits must be associated with an Issue in JIRA. If no issue exists you sho
 ##Front-End Code Conventions
 
 ###HTML Templates
-###Less and CSS
-###Java Scripts
+####General thumb rules
+* HTML templates contains either one block or page.
+* The filename for a template are page-[pagename].html or block-[blockname].html
 
+####Block Templates
+Wrap your block with a div and name it with a class
+```html
+<div class="block-myblock">...</div>
+```
+
+Avoid further classes unless neccessary
+```html
+<div class="block-myblock">
+	<h3>Lorem ipsum</h3>
+	<p>lorem ipsum dolor sit amet</p>
+</div>
+```
+
+####Page Templates
+Wrap your page template with a div and name it with a class.
+```html
+<div class="page-mypage">...</div>
+```
+
+###Less and CSS
+####General thumb rules
+* Create one less file per block and/or page template
+* Create one less file per global function such as side-navigation, pagination or footer
+* Use classes, always. Never use ID's unless hell has frozen over.
+* If not sure wether to create a new less file or add to an existing, create a new one.
+
+####Templates
+Wrap your styling with the page- or block-template class name
+```css
+page-newsarchive {
+	h2 {
+		font-size:30px;
+	}
+	...
+}
+```
+
+###Java Scripts
+* Create one script file per object
+* Keep common functions in the main.js
+* If you create something amazing that other projects may benefit from, consult your co-workers, we might want to extract it into a dependency
+* Do not reinvent the wheel
 
 ##Back-End Code Conventions
+TODO
 
 ##The laws of code
 1. The developer must not commit faulty code to any other branch than his/her own feature branch. 
