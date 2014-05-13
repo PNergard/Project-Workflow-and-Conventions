@@ -121,6 +121,8 @@ page-newsarchive {
 
 ###Java Scripts
 * Create one script file per object
+* Keep variables in data-properties in the HTML mockup or read them from a JSON-file. Never keep variables or paths in the JavaScript files.
+* Keep your functions dynamic. Do not rely on static information, keep in mind that information can and will change.
 * Keep common functions in the main.js
 * If you create something amazing that other projects may benefit from, consult your co-workers, we might want to extract it into a dependency
 * Do not reinvent the wheel
