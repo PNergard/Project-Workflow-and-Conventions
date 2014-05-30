@@ -128,7 +128,18 @@ page-newsarchive {
 * Do not reinvent the wheel
 
 ##Back-End Code Conventions
-TODO
+###General
+* AutoEventWireup shall always be set to false in all .masterpage, .ascx and .aspx files
+* We have a 'Business' folder in the main web project as well as a separate Business project. Any function, extention, webcontrol etc that can be reused by other projects should be placed in the separate project. Project specifc in the main web project.
+* Don't just copy/paste code that are not included in the solution. Take the time to clean up the code if you see anything that needs to be done. Could be removing obsolete code, removing old comments, renaming variables, renaming class names, adding new comments etc.
+* Files that are not needed should not just be exluded from the projecte. Delete, commit and push to keep the Git-repo nice and clean.
+
+###Languages
+* Always think multi-language site. Which properties need to be [CultureSpecific]?!
+* If you add properties to templates or blocks always add a correct caption and if needed helptext via the admin-plugin XML Language manager.
+* All other things that are possible to translate via the XML Language manger should be translated.
+* Never hardcode texts in .aspx or .asxc files. Add a property for the editor to be able to add a text or add translation to views_sv file. Add a descriptive first element and all translations for the template / block below that (don't add more sub elements since the tool doesn't support it).
+* Knowit.Business have different webcontrols for creating labels for properties. (Uses the property caption.
 
 ##The laws of code
 1. The developer must not commit faulty code to any other branch than his/her own feature branch. 
